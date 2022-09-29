@@ -1,1 +1,1 @@
-# modx_revolution_ubuntu
+# Modx Revolution Ubuntu
