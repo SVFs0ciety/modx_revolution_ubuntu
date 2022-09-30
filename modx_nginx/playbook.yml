@@ -1,0 +1,14 @@
+- hosts: client
+  become: yes
+  tasks:
+    - name: 'Nginx Install'
+      include_tasks: nginx.yml
+
+    - name: 'PHP Install'
+      include_tasks: php.yml
+
+    - name: 'Mysql Install'
+      include_tasks: mysql.yml
+
+    - name: 'Download and Install Modx'
+      include_tasks: download_and_extracting_modx.yml

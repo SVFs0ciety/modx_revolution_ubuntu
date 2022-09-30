@@ -1,0 +1,29 @@
+    - name: 'Create Folder Modx'
+      file: 
+        path: /var/www/html/modx
+        state: directory
+
+    - name: 'Modx Download Package'
+      get_url:
+        timeout: 300 
+        url: https://modx.com/download/direct?id=modx-3.0.1-pl.zip      
+        dest: /usr/src/direct?id=modx-3.0.1-pl.zip
+      register: output
+
+    - name: 'Extracting package'
+      when: output.changed == true
+      unarchive:
+        src: /usr/src/direct?id=modx-3.0.1-pl.zip
+        dest: /usr/src/
+        remote_src: yes
+
+    - name: 'Move unzip catalog Modx in root directory'
+      shell: mv /usr/src/modx-3.0.1-pl/* /var/www/html/modx
+
+    - name: 'Change the ownership of joomla directory to the www-data user'
+      file:
+        path: /var/www/html/modx
+        state: directory
+        recurse: yes
+        owner: www-data
+        group: www-data
